@@ -1,4 +1,25 @@
+
 # parcel-react-express-boilerplate
+
+#### DOCKER Commands for running mongo
+
+`docker run --name my-mongo -d -v data:/data/db -p 27017:27017 mongo`
+
+##### IP = 172.17.0.2
+
+
+#### DOCKER commands for building the node app
+
+`docker build --tag=note-taking-app .`
+
+
+#### DOCKER command for running the above image 
+
+`docker run -p 4000:8080 note-taking-app`
+
+---
+
+
 Boilerplate for Full-stack JS projects: Includes React with all babel plugins, Express &amp; Mongoose setup, bundled with parcel 
 
 * Scripts:

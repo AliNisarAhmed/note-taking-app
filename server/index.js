@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 
-connect('mongodb://localhost/test-db')
+connect('mongodb://172.17.0.2:27017/test-db')
   .then(() => {
     app.listen(port, () => console.log(`> Listening on port ${port}!`));
   });
