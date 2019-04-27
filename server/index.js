@@ -11,19 +11,6 @@ const connect = require('./connect');
 const noteRouter = require('./routes/api/notes');
 const authRouter = require('./routes/auth/index');
 
-// ================= API =========================
-
-// Auth
-// -> /api/auth/register : User can enter username (unique) and password to signup.
-// -> /api/auth/login : User logins using username & password
-
-// Notes
-// -> POST: /api/notes/create/:userId => User can create a note, only after logging in
-// -> DELETE: /api/notes/delete/:noteId => User can delete a note
-// -> GET: /api/notes/all/:userId => get all notes for a user
-// -> PUT: /
-
-//================================================
 
 
 // **** APP ****

@@ -1,5 +1,5 @@
 
-# parcel-react-express-boilerplate
+# Note Taking App - Using Docker to developer and deploy
 
 #### DOCKER Commands for running mongo
 
@@ -17,7 +17,26 @@
 
 `docker run -p 4000:8080 note-taking-app`
 
+#### After adding `docker-compose.yml` file, the following command was executed
+
+`sudo docker-compose up`
+
+
 ---
+
+#### ================= API =========================
+
+##### Auth
+**POST** /api/auth/register : User can enter username (unique) and password to signup.
+**POST** -> /api/auth/login : User logins using username & password
+
+##### Notes
+**GET**:    /api/notes                => get all notes for a user
+**POST**:   /api/notes/create         => User can create a note, only after logging in
+**DELETE**: /api/notes/:noteId        => User can delete a note
+**PUT**:    /api/notes/:noteId        => Modify a note
+
+//================================================
 
 
 Boilerplate for Full-stack JS projects: Includes React with all babel plugins, Express &amp; Mongoose setup, bundled with parcel 
