@@ -2,12 +2,17 @@ const User = require('./user');
 const Note = require('./note');
 
 // ==== NOTES FUNCTIONS ====
+
 function getAllNotes(userId) {
   return Note.find({ creator_id: userId }).exec();
 }
 
 function createNote(noteObj) {
   return Note.create(noteObj);
+}
+
+function updateNote(noteId, updates) {
+  return Note.findByIdAndUpdate(noteId, {...updates, updatedOn: Date.now() }, { new: true }).exec();
 }
 
 function findNoteById(noteId) {
@@ -35,6 +40,7 @@ module.exports = {
   createNote,
   findNoteById,
   deleteNote,
+  updateNote,
 
   // User functions
   findUserByUsername,

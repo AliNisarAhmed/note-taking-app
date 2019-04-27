@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const boom = require('boom');
 const Joi = require('joi');
-const ObjectId = require('mongoose').Types.ObjectId;
 
 const dbQuery = require('../../models/queries');
 const createNoteSchema = require('../../validation/createNoteValidation');
+const updateNoteSchema = require('../../validation/updateNoteSchema');
 const asyncMiddleware = require('../../errorHandler/asyncMiddleware');
 const authMiddleware = require('../auth/authMiddleware');
 
@@ -64,5 +64,29 @@ router.delete('/:noteId', authMiddleware, asyncMiddleware(async (req, res) => {
   throw boom.badRequest('Failed to delete the note');
 
 }));
+
+
+// **** PUT - update a note (requires login) - api/notes/:noteId
+
+router.put('/:noteId', authMiddleware, asyncMiddleware(async (req, res) => {
+  const { user } = req;
+  const { noteId } = req.params;
+
+  const { error, value } = Joi.validate(req.body, updateNoteSchema);
+  if (error) throw boom.badRequest('Fields cannot be empty');
+
+
+  const foundNote = await dbQuery.findNoteById(noteId);
+  if (!foundNote) throw boom.badRequest('Invalid Note Id');
+
+  if (String(foundNote.creator_id) === String(user.id)) {
+    const updatedNote = await dbQuery.updateNote(noteId, value);
+    if (!updatedNote) throw boom.internal('Could not modify note, please try again');
+    return res.status(200).json(updatedNote);
+  }
+  throw boom.unauthorized('You are not authorized to modify this note');
+
+}));
+
 
 module.exports = router;
