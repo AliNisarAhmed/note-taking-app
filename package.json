@@ -8,7 +8,8 @@
     "start-watch": "nodemon server/index.js",
     "dev": "concurrently --kill-others \"npm run start-watch\" \"npm run build-watch\"",
     "build": "parcel build ./client/index.html",
-    "start": "npm run build && node server/index.js"
+    "start": "node server/index.js && npm run build",
+    "serve": "node server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,19 +24,19 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.0",
-    "parcel-bundler": "^1.11.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
-  },
-  "devDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "boom": "^7.3.0",
-    "concurrently": "^4.1.0",
-    "eslint": "^5.16.0"
+    "concurrently": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "parcel-bundler": "^1.12.3"
   },
   "babel": {
     "presets": [
