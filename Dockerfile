@@ -1,17 +1,18 @@
 FROM node:11.14 as builder
 WORKDIR /app
-COPY . .
+COPY package.json /app
 RUN npm install
+COPY . /app
 RUN npm run build
-
-FROM node:11.14
-COPY --from=builder /app/dist ./dist 
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/server ./server
 ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
-RUN npm install
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "serve" ]
+
+# FROM node:11.14
+# COPY --from=builder /app/dist ./dist 
+# COPY --from=builder /app/package.json .
+# COPY --from=builder /app/server ./server
+# RUN npm install
 
 # EXPOSE 8080
 # COPY package.json ./

@@ -5,18 +5,11 @@ services:
     ports:
       - "27017:27017"
     volumes: 
-      - /data:./data/db
-    networks:
-      - network
+      - /data:/data/db
   nodejs:
-    build: './'
-    expose: 
-      - 8080
-    networks: 
-      - network
+    image: 'note-taking-app'
+    command: npm run serve
+    ports: 
+      - "3000:3000"
     depends_on:
       - db
-
-networks:
-  network:
-    driver: bridge
