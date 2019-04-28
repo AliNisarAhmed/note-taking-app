@@ -1,18 +1,26 @@
 import * as React from 'react';
 import Axios from 'axios';
+import { withRouter } from 'react-router';
+import saveToken from '../helperFunctions/saveToken';
 
 interface LoginPageState {
   username?: string,
   password?: string,
   isError?: boolean,
+  errorMessage?: string,
 }
 
-export default class LoginPage extends React.Component<{}, LoginPageState> {
+interface LoginPageProps {
+  history: any
+}
+
+class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
   
   state = {
     username: '',
     password: '',
     isError: false,
+    errorMessage: ''
   }
 
   handleInputChange = (e:React.ChangeEvent) => {
@@ -29,10 +37,11 @@ export default class LoginPage extends React.Component<{}, LoginPageState> {
       const response = await Axios.post('/api/auth/login', {
         username, password
       });
-      console.log(response);
+      saveToken(response.data.token);
+      this.props.history.push('/home');
     } catch (error) {
       console.log(error.response);
-      this.setState({isError: true});
+      this.setState({ isError: true, errorMessage: error.response.message });
     }
   }
 
@@ -50,3 +59,5 @@ export default class LoginPage extends React.Component<{}, LoginPageState> {
     );
   }
 }
+
+export default withRouter(LoginPage);
