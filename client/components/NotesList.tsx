@@ -8,6 +8,9 @@ interface NotesListProps {
 
 class NotesList extends React.Component<NotesListProps, {}> {
   
+  handleClick = () => {
+    
+  }
   
   render() {
     const { notes } = this.props;
@@ -16,7 +19,7 @@ class NotesList extends React.Component<NotesListProps, {}> {
         {notes.length === 0 ?
           <p>No Notes, Add a note</p> :
           notes.map(note => (
-            <div>
+            <div onClick={this.handleClick}>
               <h4>{note.title}</h4>
               <p>{note.text}</p>
             </div>
