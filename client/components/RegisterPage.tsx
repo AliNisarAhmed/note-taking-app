@@ -47,18 +47,50 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
 
   render() {
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <label>Username
-          <input name="username" value={this.state.username} onChange={this.handleInputChange}/>
-        </label>
-        <label>Password
-          <input name="password" value={this.state.password} onChange={this.handleInputChange} />
-        </label>
-        <label>Repeat Password
-          <input name="password2" value={this.state.password2} onChange={this.handleInputChange} />
-        </label>
-        <button>Submit</button>
-      </form>
+      <div className="row">
+        <div className="col s12">
+          <div className="card center-align">
+            <div className="card-content">
+              <h2 className="left-align">Register</h2>
+              <form onSubmit={this.handleFormSubmit}>
+                <div className="input-field col s12">
+                  <input 
+                    type="text"
+                    id="register-username"
+                    name="username" 
+                    value={this.state.username} 
+                    onChange={this.handleInputChange}/>
+                  <label htmlFor="register-username">Username</label>
+                </div>
+                <div className="input-field col s12">
+                  <input
+                    type="password"
+                    id="register-password"
+                    name="password" 
+                    value={this.state.password} 
+                    onChange={this.handleInputChange} 
+                  />
+                  <label htmlFor="register-password">Password</label>
+                </div>
+                <div className="input-field col s12">
+                  <input 
+                    type="password"
+                    id="register-password2"
+                    name="password2" 
+                    value={this.state.password2} 
+                    onChange={this.handleInputChange} 
+                  />
+                  <label htmlFor="register-password2">Repeat Password</label>
+                </div>
+                <button type="submit" className="btn waves-effect waves-light">
+                  Submit
+                  <i className="material-icons right">send</i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

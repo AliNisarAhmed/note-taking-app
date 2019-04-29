@@ -4,9 +4,33 @@ COPY package.json /app
 RUN npm install
 COPY . /app
 RUN npm run build
-ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
+
+FROM node:11.14
+COPY /.env ./ 
+COPY --from=builder /app/dist/ ./dist
+COPY --from=builder /app/server/ ./server
+COPY /packageJson_server/package.json ./
+RUN npm install
+# ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
 EXPOSE 8080
 CMD [ "npm", "run", "serve" ]
+
+
+# Commands below build a docker image, but it includes everything and its size is huge
+# Will try multi stage builds now to discard the front-end dependencies
+
+# FROM node:11.14 as builder
+# WORKDIR /app
+# COPY package.json /app
+# RUN npm install
+# COPY . /app
+# RUN npm run build
+# ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
+# EXPOSE 8080
+# CMD [ "npm", "run", "serve" ]
+
+
+# RUN npm install express joi jsonwebtoken mongoose bcrypt body-parser boom concurrently cors dotenv 
 
 # FROM node:11.14
 # COPY --from=builder /app/dist ./dist 

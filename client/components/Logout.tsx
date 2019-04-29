@@ -11,7 +11,7 @@ const Logout = ({ history }) => {
   }
   
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <a href="/" className="link" onClick={handleLogout}>Logout</a>
   );
 };
 

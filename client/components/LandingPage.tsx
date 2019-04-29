@@ -2,11 +2,15 @@ import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 const LandingPage = () => (
-  <div>
-    <h1>Note App</h1>
-    <h2>Welcome, Please log in or Register to use</h2>
-    <Link to="/login">Login</Link>
-    <Link to="/register">Register</Link>
+  <div className="container landing">
+    <div className="landing--title">
+      <h1 className="center-align">Note App</h1>
+      <h3 className="center-align">Save your notes, anytime, anywhere</h3>
+    </div>
+    <div className="landing--button">
+      <Link to="/register" className="btn-large waves-effect waves-light center-align">Get Started</Link>
+      <p className="center-align">Already have an account? <Link to="/login" className="link center-align">Log in</Link></p>   
+    </div> 
   </div>
 );
 

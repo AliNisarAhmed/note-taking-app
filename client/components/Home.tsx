@@ -4,9 +4,8 @@ import Modal from 'react-modal';
 
 import NotesList from './NotesList';
 import WithLoading from './WithLoading';
-import Logout from './Logout';
-import AddNote from './AddNote';
 import ModalChild from './ModalChild';
+import Navbar from './Navbar';
 
 import getToken from '../helperFunctions/getToken';
 
@@ -84,25 +83,33 @@ export default class Home extends Component<{}, NotesState> {
     this.setState({ notes: response.data, isLoading: false });
   }
 
+  handleNoteClick = () => {
+
+  }
+
 
   render() {
     return (
-      <div>
-        <p>Your Dashboard</p>
-        <AddNote openModal={this.openModal} setModalChildren={this.setModalChildren}/>
-        <Logout />
-        <WithLoadingNotesList isLoading={this.state.isLoading} notes={this.state.notes} />
-        <Modal 
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          styles={customStyles}
-        >
-          <ModalChild 
-            modalMode={this.state.modalChildren} 
-            closeModal={this.closeModal}
-            fetchNotes={this.fetchNotes}
-            />
-        </Modal>
+      <div className="home">
+        <Navbar openModal={this.openModal} setModalChildren={this.setModalChildren} />
+        <div className="container">
+          <WithLoadingNotesList 
+            isLoading={this.state.isLoading} 
+            notes={this.state.notes} 
+            handleNoteClick={this.handleNoteClick}
+          />
+          <Modal 
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            styles={customStyles}
+          >
+            <ModalChild 
+              modalMode={this.state.modalChildren} 
+              closeModal={this.closeModal}
+              fetchNotes={this.fetchNotes}
+              />
+          </Modal>
+        </div>
       </div>
     );
   }

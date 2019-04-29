@@ -2,27 +2,28 @@ import * as React from 'react';
 
 import { Note } from '../interfaces/Note';
 
+import NoteComponent from './NoteComponent';
+
 interface NotesListProps {
   notes: Note[]
 }
 
 class NotesList extends React.Component<NotesListProps, {}> {
   
-  handleClick = () => {
-    
-  }
-  
   render() {
     const { notes } = this.props;
     return (
-      <div>
+      <div className="row">
         {notes.length === 0 ?
           <p>No Notes, Add a note</p> :
           notes.map(note => (
-            <div onClick={this.handleClick}>
-              <h4>{note.title}</h4>
-              <p>{note.text}</p>
-            </div>
+            <NoteComponent
+              handleNoteClick={this.props.handNoteClick}
+              text={note.text}
+              noteTitle={note.title}
+              noteId={note._id}
+            />
+            
           ))
         }
       </div>

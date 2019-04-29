@@ -8,7 +8,7 @@ const AddNote = ({ openModal, setModalChildren }) => {
   }
 
   return (
-    <button onClick={handleClick}>Add Note</button>
+    <a onClick={handleClick}>Add Note</a>
   );
 }
 

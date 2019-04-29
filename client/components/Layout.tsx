@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const Layout: React.SFC = ({ children }) => (
-  <div>
+  <div className="hero valign-wrapper">
     { children }
   </div>
 );
