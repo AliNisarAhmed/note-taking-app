@@ -18,7 +18,7 @@ class NotesList extends React.Component<NotesListProps, {}> {
           <p>No Notes, Add a note</p> :
           notes.map(note => (
             <NoteComponent
-              handleNoteClick={this.props.handNoteClick}
+              handleNoteClick={this.props.handleNoteClick}
               text={note.text}
               noteTitle={note.title}
               noteId={note._id}

@@ -24,3 +24,13 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.note:hover {
+  cursor: pointer;
+}
+
+.ReactModal__Content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

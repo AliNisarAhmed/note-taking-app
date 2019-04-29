@@ -11,6 +11,7 @@ import getToken from '../helperFunctions/getToken';
 
 import { Note } from '../interfaces/Note';
 import { ModalModes } from '../interfaces/ModalModes';
+import { withRouter } from 'react-router';
 
 
 interface NotesState {
@@ -19,14 +20,15 @@ interface NotesState {
   modalIsOpen?: boolean,
   modalChildren?: ModalModes,
   clickedNoteId: string,
-  clickedNoteTitle: string,
-  clickedNoteText: string,
 }
 
 
 const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  }, 
   content : {
-    top                   : '50%',
+    top                   : '60%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
@@ -37,7 +39,7 @@ const customStyles = {
 
 const WithLoadingNotesList = WithLoading(NotesList);
 
-export default class Home extends Component<{}, NotesState> {
+class Home extends Component<{}, NotesState> {
 
   state = {
     notes: [],
@@ -45,8 +47,6 @@ export default class Home extends Component<{}, NotesState> {
     modalIsOpen: false,
     modalChildren: "none",
     clickedNoteId: '',
-    clickedNoteTitle: '',
-    clickedNoteText: '',
   }
 
   setModalChildren = (value: ModalModes) => {
@@ -83,8 +83,26 @@ export default class Home extends Component<{}, NotesState> {
     this.setState({ notes: response.data, isLoading: false });
   }
 
-  handleNoteClick = () => {
+  handleNoteClick = (noteId) => {
+    console.log(noteId);
+    this.setState({ clickedNoteId: noteId, modalChildren: "show" }, this.openModal);
+  }
 
+  handleNoteDelete = async (noteId) => {
+    console.log(noteId);
+    try {
+      const response = await Axios({
+        method: 'delete',
+        url:`/api/notes/${noteId}`,
+        headers: {
+          authorization: getToken()
+        }
+      });
+      this.closeModal();
+      this.fetchNotes();
+    } catch (error) {
+      console.log(error.response);  
+    }
   }
 
 
@@ -107,6 +125,9 @@ export default class Home extends Component<{}, NotesState> {
               modalMode={this.state.modalChildren} 
               closeModal={this.closeModal}
               fetchNotes={this.fetchNotes}
+              clickedNoteId={this.state.clickedNoteId}
+              notes={this.state.notes}
+              handleNoteDelete={this.handleNoteDelete}
               />
           </Modal>
         </div>
@@ -114,3 +135,5 @@ export default class Home extends Component<{}, NotesState> {
     );
   }
 }
+
+export default Home;

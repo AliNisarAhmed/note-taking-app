@@ -33,7 +33,7 @@ class NewNote extends React.Component {
         }
       });
       this.props.closeModal();
-      this.props.fetchNotes(token);
+      this.props.fetchNotes();
     } catch (error) {
       console.log(error.response);
     }
@@ -41,15 +41,41 @@ class NewNote extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <label>Title
-          <input name="title" value={this.state.title} onChange={this.handleInputChange} required/>
-        </label>
-        <label>
-          <textarea name="text" cols="30" rows="10" onChange={this.handleInputChange} required></textarea>
-        </label>
-        <button>Create Note</button>
-      </form>
+      <div className="container">
+        <h4 className="left">Create a new note</h4>
+        <div className="row">
+          <form onSubmit={this.handleFormSubmit}>
+            <div className="input-field">
+              <input
+                type="text"
+                id="new-title"
+                name="title" 
+                value={this.state.title} 
+                onChange={this.handleInputChange} 
+                required
+              />
+              <label htmlFor="new-title">Note Title</label>
+            </div>
+            <div className="input-field">
+              <textarea 
+                id="textarea1"
+                name="text" 
+                onChange={this.handleInputChange} 
+                required
+                className="materialize-textarea"
+                >
+              </textarea>
+              <label htmlFor="textarea1">Note Text</label>
+            </div>
+            <button className="btn">
+              Done
+              <i className="material-icons right">
+                done
+              </i>
+            </button>
+          </form>
+        </div>
+      </div>
     )
   }
 }
