@@ -6,6 +6,7 @@ import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import PrivateRoute from './PrivateRoute';
 import Home from './Home';
+import RegisterPage from './RegisterPage';
 
 import isLoggedIn from '../helperFunctions/isLoggedIn';
 
@@ -25,7 +26,16 @@ class App extends React.Component<AppProps, {}> {
             <Redirect to="/home" /> :
             <LandingPage />
           )}/>
-          <Route path="/login" exact component={LoginPage} />
+          <Route path="/login" exact render={() => (
+            isLoggedIn() ?
+            <Redirect to="/home" /> :
+            <LoginPage />
+          )} />
+          <Route path="/register" exact render={() => (
+            isLoggedIn() ?
+            <Redirect to="/home" /> :
+            <RegisterPage />
+          )} />
           <PrivateRoute path="/home" component={Home} />
         </Router> 
       </Layout>

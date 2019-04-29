@@ -1,0 +1,67 @@
+import * as React from 'react';
+import Axios from 'axios';
+import { withRouter } from 'react-router';
+
+interface RegisterPageState {
+  username: string,
+  password: string,
+  password2: string,
+  isError: boolean,
+  errorMessage: string, 
+}
+
+interface RegisterPageProps {
+  history: any
+}
+
+class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState> {
+
+  state = {
+    username: '',
+    password: '',
+    password2: '',
+    isError: false,
+    errorMessage: ''
+  }
+
+  handleInputChange = (e:React.ChangeEvent) => {
+    let target = e.target as HTMLInputElement;
+    this.setState({
+      [target.name]: target.value
+    });
+  };
+
+  handleFormSubmit = async (e:React.FormEvent) => {
+    e.preventDefault();
+    const { username, password, password2 } = this.state;
+    try {
+      const response = await Axios.post('/api/auth/register', {
+        username, password, password2
+      });
+      this.props.history.push('/login');
+    } catch (error) {
+      console.log(error.response);
+      this.setState({ isError: true, errorMessage: error.response.message });
+    }
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleFormSubmit}>
+        <label>Username
+          <input name="username" value={this.state.username} onChange={this.handleInputChange}/>
+        </label>
+        <label>Password
+          <input name="password" value={this.state.password} onChange={this.handleInputChange} />
+        </label>
+        <label>Repeat Password
+          <input name="password2" value={this.state.password2} onChange={this.handleInputChange} />
+        </label>
+        <button>Submit</button>
+      </form>
+    );
+  }
+}
+
+export default withRouter(RegisterPage);
+

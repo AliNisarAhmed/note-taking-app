@@ -3,6 +3,7 @@ import Axios from 'axios';
 
 import NotesList from './NotesList';
 import WithLoading from './WithLoading';
+import Logout from './Logout';
 
 import getToken from '../helperFunctions/getToken';
 
@@ -45,6 +46,7 @@ export default class Home extends Component<{}, NotesState> {
     return (
       <div>
         <p>Your Dashboard</p>
+        <Logout />
         <WithLoadingNotesList isLoading={this.state.isLoading} notes={this.state.notes} />
       </div>
     );
