@@ -11,7 +11,6 @@ import getToken from '../helperFunctions/getToken';
 
 import { Note } from '../interfaces/Note';
 import { ModalModes } from '../interfaces/ModalModes';
-import { withRouter } from 'react-router';
 
 
 interface NotesState {
@@ -19,14 +18,11 @@ interface NotesState {
   isLoading?: boolean,
   modalIsOpen?: boolean,
   modalChildren?: ModalModes,
-  clickedNoteId: string,
+  clickedNoteId?: string,
 }
 
 
 const customStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-  }, 
   content : {
     top                   : '60%',
     left                  : '50%',
@@ -45,7 +41,7 @@ class Home extends Component<{}, NotesState> {
     notes: [],
     isLoading: false,
     modalIsOpen: false,
-    modalChildren: "none",
+    modalChildren: null,
     clickedNoteId: '',
   }
 
@@ -83,12 +79,12 @@ class Home extends Component<{}, NotesState> {
     this.setState({ notes: response.data, isLoading: false });
   }
 
-  handleNoteClick = (noteId) => {
+  handleNoteClick = (noteId:string) => {
     console.log(noteId);
     this.setState({ clickedNoteId: noteId, modalChildren: "show" }, this.openModal);
   }
 
-  handleNoteDelete = async (noteId) => {
+  handleNoteDelete = async (noteId:string) => {
     console.log(noteId);
     try {
       const response = await Axios({

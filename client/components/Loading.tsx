@@ -2,7 +2,19 @@ import * as React from 'react';
 
 function Loading () {
   return (
-    <p>Loading!</p>
+  <div className="loader-icon">
+    <div className="preloader-wrapper big active">
+      <div className="spinner-layer spinner-blue-only">
+        <div className="circle-clipper left">
+          <div className="circle"></div>
+        </div><div className="gap-patch">
+          <div className="circle"></div>
+        </div><div className="circle-clipper right">
+          <div className="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   )
 }
 

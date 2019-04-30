@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export default class NoteComponent extends Component {
+interface NoteComponentProps {
+  handleNoteClick: Function,
+  noteId: string,
+  noteTitle: string,
+  text: string,
+}
+
+export default class NoteComponent extends Component<NoteComponentProps, {}> {
   
   handleClick = () => {
     this.props.handleNoteClick(this.props.noteId);

@@ -5,7 +5,8 @@ import { Note } from '../interfaces/Note';
 import NoteComponent from './NoteComponent';
 
 interface NotesListProps {
-  notes: Note[]
+  notes: Note[],
+  handleNoteClick: Function,
 }
 
 class NotesList extends React.Component<NotesListProps, {}> {

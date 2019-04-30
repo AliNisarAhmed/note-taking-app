@@ -1,17 +1,18 @@
 import * as React from 'react';
 import Axios from 'axios';
 import { withRouter } from 'react-router';
+import SubmitButton from './SubmitButton';
 
 interface RegisterPageState {
-  username: string,
-  password: string,
-  password2: string,
-  isError: boolean,
-  errorMessage: string, 
+  username?: string,
+  password?: string,
+  password2?: string,
+  isError?: boolean,
+  errorMessage?: string, 
 }
 
 interface RegisterPageProps {
-  history: any
+  history: History
 }
 
 class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState> {
@@ -40,7 +41,6 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
       });
       this.props.history.push('/login');
     } catch (error) {
-      console.log(error.response);
       this.setState({ isError: true, errorMessage: error.response.message });
     }
   }
@@ -82,10 +82,7 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
                   />
                   <label htmlFor="register-password2">Repeat Password</label>
                 </div>
-                <button type="submit" className="btn waves-effect waves-light">
-                  Submit
-                  <i className="material-icons right">send</i>
-                </button>
+                <SubmitButton />
               </form>
             </div>
           </div>

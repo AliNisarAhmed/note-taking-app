@@ -11,7 +11,7 @@ import RegisterPage from './RegisterPage';
 import isLoggedIn from '../helperFunctions/isLoggedIn';
 
 interface AppProps {
-  history: any
+  history: History
 }
 
 class App extends React.Component<AppProps, {}> {

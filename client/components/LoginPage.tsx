@@ -2,6 +2,7 @@ import * as React from 'react';
 import Axios from 'axios';
 import { withRouter } from 'react-router';
 import saveToken from '../helperFunctions/saveToken';
+import SubmitButton from './SubmitButton';
 
 interface LoginPageState {
   username?: string,
@@ -11,7 +12,7 @@ interface LoginPageState {
 }
 
 interface LoginPageProps {
-  history: any
+  history: History
 }
 
 class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
@@ -75,13 +76,14 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                   />
                   <label htmlFor="login-password">Password</label>
                   {this.state.isError &&
-                    <span className="helper-text" data-error={this.state.isError ? "Username or Password Invalid" : ""}>Hello</span>
+                    <span 
+                      className="helper-text red-text" 
+                    >
+                      Incorrect Username and/or Password  
+                    </span>
                   }
                 </div>
-                <button type="submit" className="btn waves-effect waves-light">
-                  Submit
-                  <i className="material-icons right">send</i>
-                </button>
+                <SubmitButton />
               </form>
             </div>
           </div>

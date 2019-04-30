@@ -2,7 +2,12 @@ import * as React from 'react';
 import AddNote from './AddNote';
 import Logout from './Logout';
 
-const Navbar = ({ openModal, setModalChildren }) => {
+interface NavbarProps {
+  openModal: Function,
+  setModalChildren: Function,
+}
+
+const Navbar = ({ openModal, setModalChildren }: NavbarProps) => {
 
   return (
     <div className="navbar-fixed">
