@@ -1,15 +1,21 @@
 version: '3'
 services: 
   db:
-    image: 'mongo'
+    image: 'alinisarahmed/note-app:my-mongo'
     ports:
       - "27017:27017"
-    volumes: 
-      - /data:/data/db
+    volumes:
+      - /data/db:/data/db
   nodejs:
-    image: 'note-taking-app'
+    build: .
+    image: 'alinisarahmed/note-app:v1'
     command: npm run serve
     ports: 
       - "3000:3000"
     depends_on:
       - db
+    links:
+      - db
+    environment: 
+      - MONGO_HOSTNAME=mongodb://db:27017/test-db
+      - PORT=3000
