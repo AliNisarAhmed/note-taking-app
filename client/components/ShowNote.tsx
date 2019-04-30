@@ -5,9 +5,10 @@ interface ShowModalProps {
   note: Note,
   closeModal: Function,
   handleNoteDelete: Function,
+  handleEdit: Function,
 }
 
-export default function ShowNote({ note, closeModal, handleNoteDelete }: ShowModalProps) {
+export default function ShowNote({ note, closeModal, handleNoteDelete, handleEdit }: ShowModalProps) {
   return (
     <div className="container">
       <div className="card blue-grey darken-1">
@@ -16,10 +17,13 @@ export default function ShowNote({ note, closeModal, handleNoteDelete }: ShowMod
           <p className="flow-text">{note.text}</p>
         </div>
         <div className="card-action">
-          <button className="blue-text btn-flat">
+          <button 
+            className="blue-text btn-flat"
+            onClick={handleEdit}
+          >
             Edit
             <i className="material-icons left">
-            edit
+              edit
             </i>
           </button>
           <button 

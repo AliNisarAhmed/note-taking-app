@@ -8,7 +8,7 @@ services:
       - /data/db:/data/db
   nodejs:
     build: .
-    image: 'alinisarahmed/note-app:v1'
+    image: 'alinisarahmed/note-app:v2'
     command: npm run serve
     ports: 
       - "3000:3000"

@@ -99,6 +99,30 @@ class Home extends Component<{}, NotesState> {
     }
   }
 
+  handleEdit = () => {
+    console.log('Handle Edit in Home')
+    this.setState({ modalChildren: "update" });
+  }
+
+  handleNoteUpdate = async (noteId: string, {title, text}: { title: string, text: string}) => {
+    try {
+      const response = await Axios({
+        method: 'put',
+        url:`/api/notes/${noteId}`,
+        data: {
+          title, text
+        },
+        headers: {
+          authorization: getToken()
+        }
+      });
+      this.closeModal();
+      this.fetchNotes();
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
 
   render() {
     return (
@@ -122,7 +146,9 @@ class Home extends Component<{}, NotesState> {
               clickedNoteId={this.state.clickedNoteId}
               notes={this.state.notes}
               handleNoteDelete={this.handleNoteDelete}
-              />
+              handleNoteUpdate={this.handleNoteUpdate}
+              handleEdit={this.handleEdit}
+            />
           </Modal>
         </div>
       </div>

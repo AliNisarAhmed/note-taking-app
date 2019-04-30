@@ -5,12 +5,15 @@ import { ModalModes } from '../interfaces/ModalModes';
 
 import NewNote from './NewNote';
 import ShowNote from './ShowNote';
+import UpdateNote from './UpdateNote';
 
 interface ModalChildProps {
   modalMode: ModalModes,
   closeModal: Function,
   fetchNotes: Function,
   handleNoteDelete: Function,
+  handleNoteUpdate: Function,
+  handleEdit: Function,
   clickedNoteId: string,
   notes: Note[]
 }
@@ -28,11 +31,19 @@ class ModalChild extends React.Component<ModalChildProps, {}> {
           note={note} 
           closeModal={this.props.closeModal} 
           handleNoteDelete={this.props.handleNoteDelete} 
+          handleEdit={this.props.handleEdit}
         />
       )
     } 
     else {
-      <div>MODAL UPDATE</div>
+      let note = this.props.notes.find(note => note._id === this.props.clickedNoteId) as Note;
+      return (
+        <UpdateNote 
+          note={note}
+          closeModal={this.props.closeModal}
+          handleNoteUpdate={this.props.handleNoteUpdate}
+        />
+      );
     }
   }
 }
