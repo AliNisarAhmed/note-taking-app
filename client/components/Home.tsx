@@ -59,10 +59,10 @@ class Home extends Component<{}, NotesState> {
 
 
   async componentDidMount() {
+    Modal.setAppElement(document.getElementById('home'));
     try {
       await this.fetchNotes();
     } catch (error) {
-      console.log(error.response);
     }
   }
 
@@ -80,12 +80,10 @@ class Home extends Component<{}, NotesState> {
   }
 
   handleNoteClick = (noteId:string) => {
-    console.log(noteId);
     this.setState({ clickedNoteId: noteId, modalChildren: "show" }, this.openModal);
   }
 
   handleNoteDelete = async (noteId:string) => {
-    console.log(noteId);
     try {
       const response = await Axios({
         method: 'delete',
@@ -97,14 +95,14 @@ class Home extends Component<{}, NotesState> {
       this.closeModal();
       this.fetchNotes();
     } catch (error) {
-      console.log(error.response);  
+
     }
   }
 
 
   render() {
     return (
-      <div className="home">
+      <div className="home" id="home">
         <Navbar openModal={this.openModal} setModalChildren={this.setModalChildren} />
         <div className="container">
           <WithLoadingNotesList 
