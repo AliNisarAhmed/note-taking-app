@@ -54,9 +54,10 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_HOSTNAME || 'mongodb://172.17.0.2:27017/test-db';
 
-connect(`${MONGO_URI}`)
-  .then(() => {
-    app.listen(port, () => console.log(`> Listening on port ${port}!`));
+
+connect(MONGO_URI)
+.then(() => {
+  app.listen(port, () => console.log(`> Listening on port ${port}!`));
   })
   .catch(() => {
     console.log('error connecting to mongodb');

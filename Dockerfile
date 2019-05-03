@@ -11,7 +11,8 @@ COPY --from=builder /app/dist/ ./dist
 COPY --from=builder /app/server/ ./server
 COPY /packageJson_server/package.json ./
 RUN npm install
-# ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
+ENV SECRET_FOR_TOKEN="sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))"
+ENV MONGO_HOSTNAME="mongodb://aa87:abc123@ds151066.mlab.com:51066/note-app"
 EXPOSE 8080
 CMD [ "npm", "run", "serve" ]
 

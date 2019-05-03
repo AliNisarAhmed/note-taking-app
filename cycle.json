@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "about": null,
+  "tests": [],
+  "services": {
+    "loadbalancer": null,
+    "vpn": null
+  },
+  "containers": {
+    "db": {
+      "name": "mongodb",
+      "image": {
+        "name": "mongodb",
+        "source": {
+          "docker_hub": {
+            "target": "alinisarahmed/note-app:my-mongo",
+            "username": ""
+          }
+        }
+      },
+      "config": {
+        "network": {
+          "public": "disable",
+          "hostname": "db",
+          "ports": [
+            "27017:27017"
+          ]
+        },
+        "deploy": {
+          "instances": 1,
+          "constraints": null,
+          "shutdown": null,
+          "restart": null,
+          "health_check": null
+        },
+        "runtime": {
+          "workdir": null,
+          "command": null,
+          "namespaces": null,
+          "capabilities": null,
+          "privileged": false
+        },
+        "scaling": null,
+        "resources": null,
+        "integrations": null
+      },
+      "volumes": [
+        {
+          "local": {
+            "max_size": "1G"
+          },
+          "destination": "/data/db",
+          "read_only": false,
+          "remote_access": {
+            "enable": false,
+            "webhook": "",
+            "password": null
+          }
+        }
+      ]
+    },
+    "nodejs": {
+      "name": "NodeJS",
+      "image": {
+        "name": "v2",
+        "source": {
+          "docker_hub": {
+            "target": "alinisarahmed/note-app:v2",
+            "username": ""
+          }
+        }
+      },
+      "config": {
+        "network": {
+          "public": "enable",
+          "hostname": "nodejs",
+          "ports": [
+            "3000:3000"
+          ]
+        },
+        "deploy": {
+          "instances": 1,
+          "constraints": null,
+          "shutdown": null,
+          "restart": null,
+          "health_check": null
+        },
+        "runtime": {
+          "workdir": null,
+          "command": null,
+          "environment_vars": {
+            "SECRET_FOR_TOKEN": "sjh374y57893yifhkhdiuy897348o2lnfihj(&(&&^IU))",
+            "MONGO_HOSTNAME": "mongodb://db:27017/test-db"
+          },
+          "namespaces": null,
+          "capabilities": null,
+          "privileged": false
+        },
+        "scaling": null,
+        "resources": null,
+        "integrations": null
+      }
+    }
+  },
+  "annotations": {}
+  }
